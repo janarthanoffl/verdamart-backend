@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My Products</title>
+</head>
+<body>
+<h1>Welcome, <span th:text="${#authentication.name}">User</span>!</h1>
+<h2>Your Products</h2>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Description</th>
+    </tr>
+    <tr th:each="product : ${products}">
+
+        <td th:text="${product.name}">Product Name</td>
+        <td th:text="${product.price}">$0.00</td>
+        <td th:text="${product.stock}">Product Name</td>
+        <td th:text="${product.remainStock}">Description</td>
+
+<!--        String remainStock;-->
+<!--        String supplier;-->
+
+
+    </tr>
+</table>
+
+<form th:action="@{/logout}" method="post">
+    <button type="submit">Logout</button>
+</form>
+</body>
+</html>
