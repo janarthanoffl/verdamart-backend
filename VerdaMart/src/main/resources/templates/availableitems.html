@@ -1,10 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Available Products</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
+<h2>Your Products</h2>
+<table>
+    <tr>
+        <th>Product Name</th>
+        <th>Price</th>
+        <th>Stock</th>
+        <th>Remaining Stock</th>
+        <th>Supplier</th>
+    </tr>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.name}">Product Name</td>
+        <td th:text="${product.price}">$0.00</td>
+        <td th:text="${product.stock}">100</td>
+        <td th:text="${product.remainStock}">50</td>
+        <td th:text="${product.supplier}">Supplier Name</td>
+    </tr>
+</table>
 
+<div th:if="${#lists.isEmpty(products)}">
+    <p>No products available.</p>
+</div>
+
+<form th:action="@{/logout}" method="post">
+    <button type="submit">Logout</button>
+</form>
 </body>
 </html>

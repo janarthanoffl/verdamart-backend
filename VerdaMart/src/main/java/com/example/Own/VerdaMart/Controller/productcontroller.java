@@ -4,14 +4,12 @@ package com.example.Own.VerdaMart.Controller;
 import com.example.Own.VerdaMart.Service.ProductService;
 import com.example.Own.VerdaMart.model.product;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/product")
 public class productcontroller {
 
     @Autowired
@@ -29,6 +27,7 @@ public class productcontroller {
     public List<product> AvailableItems() {
        return productService.availableitems();
    }
+
 
    
 }
