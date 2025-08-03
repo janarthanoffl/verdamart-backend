@@ -4,6 +4,7 @@ package com.example.Own.VerdaMart.Controller;
 import com.example.Own.VerdaMart.Service.ProductService;
 import com.example.Own.VerdaMart.model.product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,6 +29,14 @@ public class productcontroller {
        return productService.availableitems();
    }
 
+    @PostMapping("/buy")
+    public ResponseEntity<String> buyProduct(
+            @RequestParam String name,
+            @RequestParam int quantity) {
+
+        String response = productService.buyProduct(name, quantity);
+        return ResponseEntity.ok(response);
+    }
 
    
 }

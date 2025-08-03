@@ -9,11 +9,11 @@ public class product {
     @Id
     String name;
     int price;
-    String Stock;
-    String remainStock;
+    int Stock;
+    int remainStock;
     String supplier;
 
-    public product(int price, String name, String stock, String remainStock, String supplier) {
+    public product(int price, String name, int stock, int remainStock, String supplier) {
         this.price = price;
         this.name = name;
         this.Stock = stock;
@@ -40,19 +40,19 @@ public class product {
         this.price = price;
     }
 
-    public String getStock() {
+    public int getStock() {
         return Stock;
     }
 
-    public void setStock(String stock) {
+    public void setStock(int stock) {
         this.Stock = stock;
     }
 
-    public String getRemainStock() {
+    public int getRemainStock() {
         return remainStock;
     }
 
-    public void setRemainStock(String remainStock) {
+    public void setRemainStock(int remainStock) {
         this.remainStock = remainStock;
     }
 

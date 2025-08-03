@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -23,5 +24,24 @@ public class ProductService {
 
     public List<product> availableitems() {
      return productRepository.findAll();
+    }
+
+    public String buyProduct(String productName, int quantityToBuy) {
+        Optional<product> optionalProduct = productRepository.findByName(productName);
+
+        if (optionalProduct.isPresent()) {
+            product product = optionalProduct.get();
+
+            if (product.getRemainStock() >= quantityToBuy) {
+                product.setRemainStock(product.getRemainStock() - quantityToBuy);
+                productRepository.save(product);
+                return "Purchased " + quantityToBuy + " " + productName + "total cost: " + (product.getPrice() * quantityToBuy);
+            } else {
+                return "Only " + product.getRemainStock() + " items available";
+            }
+
+        } else {
+            return "Product not found!";
+        }
     }
 }
