@@ -29,14 +29,7 @@ public class productcontroller {
        return productService.availableitems();
    }
 
-    @PostMapping("/buy")
-    public ResponseEntity<String> buyProduct(
-            @RequestParam String name,
-            @RequestParam int quantity) {
 
-        String response = productService.buyProduct(name, quantity);
-        return ResponseEntity.ok(response);
-    }
 
    
 }
