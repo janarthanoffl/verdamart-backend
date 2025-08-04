@@ -6,6 +6,8 @@ import com.example.Own.VerdaMart.model.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CategoryService {
 
@@ -20,5 +22,18 @@ public class CategoryService {
         // For now, we just print the category name
 
 
+    }
+
+    public List<Category> getallCategories() {
+        return categoryrepository.findAll();
+    }
+
+    public String deleteCategory(Long id) {
+        if (categoryrepository.existsById(id)) {
+            categoryrepository.deleteById(id);
+            return "Category deleted successfully";
+        } else {
+            return "Category not found";
+        }
     }
 }

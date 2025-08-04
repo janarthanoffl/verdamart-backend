@@ -6,10 +6,9 @@ import com.example.Own.VerdaMart.Service.CategoryService;
 import com.example.Own.VerdaMart.model.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController()
 @RequestMapping("/api")
@@ -21,6 +20,8 @@ public class categorycontroller {
     @Autowired
     private CategoryService categoryservice;
 
+
+
     @PostMapping("/category/add")
     public String addCategory(@RequestBody Category category) {
         // Logic to add a category would go here
@@ -28,5 +29,15 @@ public class categorycontroller {
         categoryservice.addCategory(category);
         return "Category added successfully";
 
+    }
+
+    @GetMapping("/category/all")
+    public List<Category> getAllCategories() {
+        return categoryservice.getallCategories();
+    }
+
+    @DeleteMapping("/category/delete/{id}")
+    public String deleteCategory(@PathVariable Long id) {
+        return categoryservice.deleteCategory(id);
     }
 }
