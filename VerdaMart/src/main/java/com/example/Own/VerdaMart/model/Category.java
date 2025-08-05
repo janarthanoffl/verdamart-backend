@@ -1,5 +1,6 @@
 package com.example.Own.VerdaMart.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -14,6 +15,7 @@ public class Category {
     private String name; // Eg: Cooking Essentials, Vegetables & Fruits
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<ProductType> productTypes;
 
     public Category(Long id, String name, List<ProductType> productTypes) {

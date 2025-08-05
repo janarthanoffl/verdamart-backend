@@ -1,5 +1,7 @@
 package com.example.Own.VerdaMart.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -23,6 +25,7 @@ public class product {
 
     @ManyToOne
     @JoinColumn(name = "product_type_id")
+    @JsonBackReference
     private ProductType productType;
 
     public product() {

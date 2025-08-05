@@ -36,6 +36,10 @@ public class categorycontroller {
         return categoryservice.getallCategories();
     }
 
+@GetMapping("/category/find/{name}")
+public Category findCategory(@PathVariable String name) {
+        return categoryservice.getName(name);
+}
     @DeleteMapping("/category/delete/{id}")
     public String deleteCategory(@PathVariable Long id) {
         return categoryservice.deleteCategory(id);

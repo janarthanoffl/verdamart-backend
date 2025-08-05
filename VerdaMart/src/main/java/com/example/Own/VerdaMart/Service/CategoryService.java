@@ -5,6 +5,7 @@ import com.example.Own.VerdaMart.Reposotory.categoryrepository;
 import com.example.Own.VerdaMart.model.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+//import java.util.Optional;
 
 import java.util.List;
 
@@ -15,6 +16,8 @@ public class CategoryService {
 
     @Autowired
     categoryrepository categoryrepository;
+
+
 
     public void addCategory( Category category) {
         categoryrepository.save(category);
@@ -35,5 +38,11 @@ public class CategoryService {
         } else {
             return "Category not found";
         }
+    }
+
+
+    public Category getName(String name) {
+        return  categoryrepository.findByName(name)
+                .orElseThrow(() -> new RuntimeException("Category not found!"));
     }
 }
