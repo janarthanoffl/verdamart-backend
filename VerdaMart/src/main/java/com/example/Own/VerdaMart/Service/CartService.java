@@ -10,6 +10,7 @@ import com.example.Own.VerdaMart.model.product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,6 +76,20 @@ public class CartService {
         return "Item removed from cart.";
     }
 
+//    public String checkout(String username) {
+//        User user = userRepository.findByUsername(username)
+//                .orElseThrow(() -> new RuntimeException("User not found"));
+//
+//        Cart cart = user.getCart();
+//        if (cart == null || cart.getCartItems().isEmpty()) return "Cart is empty.";
+//
+//        // Simulate checkout logic (e.g. payment, order generation, etc.)
+//        cart.getCartItems().clear();
+//        cartRepository.save(cart);
+//
+//        return "Checkout successful. Thank you for your purchase!";
+//    }
+
     public String checkout(String username) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
@@ -82,11 +97,39 @@ public class CartService {
         Cart cart = user.getCart();
         if (cart == null || cart.getCartItems().isEmpty()) return "Cart is empty.";
 
-        // Simulate checkout logic (e.g. payment, order generation, etc.)
+        for (CartItem item : cart.getCartItems()) {
+            product product = item.getProduct();
+            int buyQty = item.getQuantity();
+
+            // Check stock
+            if (product.getAvailableQuantity() < buyQty) {
+                return "Not enough stock for product: " + product.getName();
+            }
+
+            // ✅ 1. Decrease available quantity
+            product.setAvailableQuantity(product.getAvailableQuantity() - buyQty);
+
+            // ✅ 2. Increase total sold quantity
+            product.setSellingquantity(product.getSellingquantity() + buyQty);
+
+            // ✅ 3. Add to sellingprice (cumulative)
+            BigDecimal totalAmount = product.getPrice().multiply(BigDecimal.valueOf(buyQty));
+            if (product.getSellingprice() == null) {
+                product.setSellingprice(totalAmount);
+            } else {
+                product.setSellingprice(product.getSellingprice().add(totalAmount));
+            }
+
+            // Save updated product
+            productRepository.save(product);
+        }
+
+        // Clear cart
         cart.getCartItems().clear();
         cartRepository.save(cart);
 
         return "Checkout successful. Thank you for your purchase!";
     }
+
 
 }

@@ -29,6 +29,11 @@ public class CartController {
         return cartService.removeFromCart(principal.getName(), itemId);
     }
 
+//    @PostMapping("/checkout")
+//    public String checkout(Principal principal) {
+//        return cartService.checkout(principal.getName());
+//    }
+
     @PostMapping("/checkout")
     public String checkout(Principal principal) {
         return cartService.checkout(principal.getName());
