@@ -1,5 +1,6 @@
 package com.example.Own.VerdaMart.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.Set;
@@ -19,6 +20,18 @@ public class User {
 
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> roles;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonBackReference
+    private Cart cart;
+
+    public Cart getCart() {
+        return cart;
+    }
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
 
     // Constructors, getters, setters
     public User() {}
