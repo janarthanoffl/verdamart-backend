@@ -29,6 +29,11 @@ public class productcontroller {
        return productService.availableitems();
    }
 
+   @PostMapping("/addquantity")
+    public String addQuantity(@RequestParam Long id, @RequestParam int available_quantity) {
+       return productService.addQuantity(id, available_quantity);
+   }
+
 
 
    

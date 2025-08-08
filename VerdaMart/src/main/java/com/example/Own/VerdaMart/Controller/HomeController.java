@@ -8,6 +8,8 @@ import java.security.Principal;
 import java.util.Map;
 
 @RestController
+
+
 public class HomeController {
 
     @GetMapping("/home")
@@ -15,7 +17,7 @@ public class HomeController {
         return Map.of("message", "Welcome!", "user", userDetails.getUsername());
     }
 
-    @GetMapping("/profile")
+    @GetMapping("/api/user/profile")
     public String getProfile(Principal principal) {
         String username = principal.getName(); // this is the currently logged-in user
         return "Welcome, " + username;

@@ -27,5 +27,13 @@ public class ProductService {
     }
 
 
-
+    public String addQuantity(Long id, int available_quantity) {
+        return productRepository.findById(id)
+                .map(prod -> {
+                    prod.setQuantity(prod.getAvailableQuantity() + available_quantity);
+                    productRepository.save(prod);
+                    return "Quantity updated successfully";
+                })
+                .orElse("Product not found");
+    }
 }
