@@ -36,4 +36,8 @@ public class ProductService {
                 })
                 .orElse("Product not found");
     }
+
+    public Optional<product> getproduct(String name) {
+      return productRepository.findByName(name);
+    }
 }

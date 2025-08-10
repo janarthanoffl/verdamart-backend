@@ -19,8 +19,9 @@ public class CartController {
         return cartService.addToCart(principal.getName(), productId, quantity);
     }
 
-    @GetMapping("/allitems")
+    @GetMapping("/mycart")
     public List<CartItem> getCartItems(Principal principal) {
+
         return cartService.getCartItems(principal.getName());
     }
 
