@@ -12,10 +12,7 @@ import java.util.Map;
 
 public class HomeController {
 
-    @GetMapping("/home")
-    public Map<String, Object> home(@AuthenticationPrincipal UserDetails userDetails) {
-        return Map.of("message", "Welcome!", "user", userDetails.getUsername());
-    }
+
 
     @GetMapping("/api/user/profile")
     public String getProfile(Principal principal) {
